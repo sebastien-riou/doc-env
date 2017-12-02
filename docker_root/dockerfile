@@ -1,0 +1,68 @@
+#list images:
+#	sudo docker images
+#
+#clean up images/containers: 
+#	sudo docker rm $(sudo docker ps -a -q)
+#	sudo docker rmi $(sudo docker images -q)
+#
+#build this: 
+#	sudo docker build -t myapp .
+#
+#run this:   
+#       sudo docker run --privileged -it -v `pwd`:/work/ myapp
+#
+#backup this:
+#	sudo docker save -o myapp.tar myapp
+#	sudo chown user myapp.tar
+#
+#restore this:
+#	sudo docker load -i myapp.tar
+
+
+
+#FROM ubuntu:yakkety
+FROM ubuntu:artful
+
+# Set the working directory 
+WORKDIR /bin
+
+# Copy the current directory contents into the container at /bin
+ADD . /bin
+
+# Install any needed packages 
+RUN apt-get update 
+
+RUN apt-get install -y ruby default-jre graphviz nodejs npm phantomjs
+RUN gem install asciidoctor-pdf --pre
+RUN gem install rouge
+RUN gem install asciidoctor-diagram
+RUN npm i wavedrom-cli --save-dev
+
+RUN apt-get install -y \
+    nano \
+    zsh \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+
+
+
+#RUN ln -s /usr/bin/python2.7 /usr/bin/python
+
+# Make port 80 available to the world outside this container
+EXPOSE 80
+
+# Define environment variable
+#ENV NAME World
+ENV QT_QPA_PLATFORM offscreen
+
+#needed to be able to execute nano
+ENV TERM xterm
+
+CMD ["export", "PATH=$PATH:/bin"]
+# Run app.py when the container launches
+#CMD ["python", "app.py"]
+#CMD ["/bin/bash"]
+#CMD ["ln","-s","/usr/bin/python2.7","/usr/bin/python"]
+WORKDIR "/work"
+ENTRYPOINT zsh 
+

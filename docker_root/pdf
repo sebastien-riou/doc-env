@@ -1,0 +1,2 @@
+#!/bin/sh
+asciidoctor -r asciidoctor-diagram -r asciidoctor-pdf -b pdf $*
