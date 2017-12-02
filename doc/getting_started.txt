@@ -1,0 +1,123 @@
+= Doc Name
+:source-highlighter: rouge
+Author <doc@example.com>
+
+== System requirement
+=== Operating system
+The doc-env should work on all recent versions of Linux, Windows and MacOS. It is tested only on Ubuntu 17 though.
+
+You need to have https://docs.docker.com/engine/installation[docker] installed on your system.
+
+== Installation (Ubuntu)
+Clone doc-env on your computer
+[source]
+git clone https://github.com/sebastien-riou/doc-env
+
+Build the container
+[source]
+cd doc-env/docker_root
+sudo docker build -t doc-env .
+
+== How to generate this PDF? (Ubuntu)
+Go in the doc directory and launch the container
+[source]
+cd ../doc
+sudo docker run --privileged -it -v `pwd`:/work/ doc-env
+
+Use the "pdf" command
+[source]
+pdf getting_started.txt
+
+== Asciidoc (asciidoctor flavour)
+=== list
+* item 1
+* item 2
+
+=== code block
+[source,verilog]
+always_ff @(posedge i_clk,posedge i_reset) begin
+    if(i_reset) cnt_sbox <= {5{1'b0}};
+    else cnt_sbox <= cnt_sbox + 1'b1;
+end
+
+=== Graphviz (dot)
+[graphviz]
+....
+digraph G {
+subgraph cluster0 {
+node [style=filled,color=white];
+style=filled;
+color=lightgrey;
+a0 -> a1 -> a2 -> a3;
+label = "process #1";
+}
+subgraph cluster1 {
+node [style=filled];
+b0 -> b1 -> b2 -> b3;
+label = "process #2";
+color=blue
+}
+start -> a0;
+start -> b0;
+a1 -> b3;
+b2 -> a3;
+a3 -> a0;
+a3 -> end;
+b3 -> end;
+start [shape=Mdiamond];
+end [shape=Msquare];
+}
+....
+
+More on this http://www.graphviz.org/pdf/dotguide.pdf[here]
+
+=== Plantuml
+[plantuml]     
+....
+class BlockProcessor
+class DiagramBlock
+class DitaaBlock
+class PlantUmlBlock
+
+BlockProcessor <|-- DiagramBlock
+DiagramBlock <|-- DitaaBlock
+DiagramBlock <|-- PlantUmlBlock
+....
+
+[plantuml]     
+....
+start
+
+while (data available?)
+  :read data;
+  :generate diagrams;
+endwhile
+
+stop
+....
+
+More on this http://plantuml.com/activity-diagram-beta[here]
+
+=== Wavedrom
+[wavedrom]
+....
+{ signal : [
+  { name: "clk",  wave: "p......" },
+  { name: "bus",  wave: "x.34.5x",   data: "head body tail" },
+  { name: "wire", wave: "0.1..0." },
+]}
+....
+
+more on this:
+
+* http://wavedrom.com
+* https://github.com/wavedrom
+* https://github.com/drom/wavedrom
+
+== Relevant links
+
+* https://github.com/asciidoctor/asciidoctor-diagram
+* https://github.com/asciidoctor/asciidoctor-pdf
+* http://asciidoctor.org/docs/user-manual
+
+
