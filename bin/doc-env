@@ -1,0 +1,4 @@
+#!/bin/sh
+
+sudo docker run --privileged -it -v `pwd`:/work/ doc-env
+

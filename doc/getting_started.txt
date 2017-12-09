@@ -1,6 +1,7 @@
 = Doc Name
+:sectids!:
 :source-highlighter: rouge
-Author <doc@example.com>
+FirstName LastName <doc@example.com>
 
 == System requirement
 === Operating system
@@ -13,16 +14,16 @@ Clone doc-env on your computer
 [source]
 git clone https://github.com/sebastien-riou/doc-env
 
-Build the container
+Run the install script. It builds the docker container and copy the doc-env script tp /usr/bin.
 [source]
-cd doc-env/docker_root
-sudo docker build -t doc-env .
+cd doc-env
+sudo ./install.sh
 
 == How to generate this PDF? (Ubuntu)
-Go in the doc directory and launch the container
+Go in the doc directory and launch doc-env
 [source]
 cd ../doc
-sudo docker run --privileged -it -v `pwd`:/work/ doc-env
+doc-env
 
 Use the "pdf" command
 [source]
