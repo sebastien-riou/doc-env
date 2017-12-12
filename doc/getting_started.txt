@@ -3,6 +3,16 @@
 :source-highlighter: rouge
 FirstName LastName <doc@example.com>
 
+== Introduction
+Doc-env is a cross platform environment which provides several tools nicely integrated together to produce PDF documents.
+The following tools installed on a https://www.docker.com[docker] linux container:
+
+* asciidoctor
+* asciidoctor-pdf
+* asciidoctor-diagram
+* wavedrom
+
+
 == System requirement
 === Operating system
 The doc-env should work on all recent versions of Linux, Windows and MacOS. It is tested only on Ubuntu 17 though.
@@ -14,22 +24,38 @@ Clone doc-env on your computer
 [source]
 git clone https://github.com/sebastien-riou/doc-env
 
-Run the install script. It builds the docker container and copy the doc-env script tp /usr/bin.
+Run the install script. It builds the docker container and copy the doc-env script to /usr/bin.
+
+WARNING: the install scripts needs an internet connection
+
 [source]
 cd doc-env
 sudo ./install.sh
 
+This should finnish by displaying "doc-env installed". If that's not the case, something went wrong. Please make sure you can run the hello world docker.
+
 == How to generate this PDF? (Ubuntu)
 Go in the doc directory and launch doc-env
 [source]
-cd ../doc
+cd doc
 doc-env
 
 Use the "pdf" command
 [source]
 pdf getting_started.txt
 
-== Asciidoc (asciidoctor flavour)
+A PDF file should be created in the doc folder.
+
+== Introduction to Asciidoc (asciidoctor flavour)
+Asciidoc is a simple convention which allows to turn text files into PDFs.
+Using text files brings many advantages. In particular it allows the documentation to be generated and versioned much in the same way as the source code.
+This section describes the basic features offered by Asciidoc, look at the source of this PDF to find out how to create this or that.
+You can also learn more online:
+
+* http://asciidoctor.org/docs/user-manual
+* https://github.com/asciidoctor/asciidoctor-pdf
+* https://github.com/asciidoctor/asciidoctor-diagram
+
 === list
 * item 1
 * item 2
@@ -70,10 +96,10 @@ end [shape=Msquare];
 }
 ....
 
-More on this http://www.graphviz.org/pdf/dotguide.pdf[here]
+More on this http://www.graphviz.org/pdf/dotguide.pdf
 
 === Plantuml
-[plantuml]     
+[plantuml]
 ....
 class BlockProcessor
 class DiagramBlock
@@ -85,7 +111,7 @@ DiagramBlock <|-- DitaaBlock
 DiagramBlock <|-- PlantUmlBlock
 ....
 
-[plantuml]     
+[plantuml]
 ....
 start
 
@@ -97,7 +123,7 @@ endwhile
 stop
 ....
 
-More on this http://plantuml.com/activity-diagram-beta[here]
+More on this http://plantuml.com/activity-diagram-beta
 
 === Wavedrom
 [wavedrom]
@@ -114,11 +140,3 @@ more on this:
 * http://wavedrom.com
 * https://github.com/wavedrom
 * https://github.com/drom/wavedrom
-
-== Relevant links
-
-* https://github.com/asciidoctor/asciidoctor-diagram
-* https://github.com/asciidoctor/asciidoctor-pdf
-* http://asciidoctor.org/docs/user-manual
-
-
