@@ -10,7 +10,9 @@ The following tools installed on a https://www.docker.com[docker] linux containe
 * asciidoctor
 * asciidoctor-pdf
 * asciidoctor-diagram
+* asciidoctor-mathematical
 * wavedrom
+* graphviz
 
 
 == System requirement
@@ -46,6 +48,13 @@ pdf getting_started.txt
 
 A PDF file should be created in the doc folder.
 
+== Shortcuts
+Few shortcuts are defined:
+
+* pdf <file>: launch asciidoctor with all plug-ins
+* wd_svg <source_file> <dest_file>: launch WaveDrom to create a SVG file. dest_file extension MUST be ".svg".
+* wd_png <source_file> <dest_file>: launch WaveDrom to create a SVG file. dest_file extension MUST be ".png".
+
 == Introduction to Asciidoc (asciidoctor flavour)
 Asciidoc is a simple convention which allows to turn text files into PDFs.
 Using text files brings many advantages. In particular it allows the documentation to be generated and versioned much in the same way as the source code.
@@ -55,6 +64,7 @@ You can also learn more online:
 * http://asciidoctor.org/docs/user-manual
 * https://github.com/asciidoctor/asciidoctor-pdf
 * https://github.com/asciidoctor/asciidoctor-diagram
+* https://github.com/asciidoctor/asciidoctor-mathematical
 
 === list
 * item 1
@@ -66,6 +76,53 @@ always_ff @(posedge i_clk,posedge i_reset) begin
     if(i_reset) cnt_sbox <= {5{1'b0}};
     else cnt_sbox <= cnt_sbox + 1'b1;
 end
+
+=== Math
+
+[latexmath] 
+++++ 
+x^n + y^n = z^n
+++++
+
+[latexmath] 
+++++
+\frac{3x}{2}
+++++
+
+[latexmath] 
+++++
+C = \alpha + \beta Y^{\gamma} + \epsilon
+++++
+
+[latexmath] 
+++++
+\alpha \beta \gamma \rho \sigma \delta \epsilon
+++++
+
+[latexmath] 
+++++
+\times \otimes \oplus \cup \cap
+++++
+
+[latexmath] 
+++++
+< > \subset \supset \subseteq \supseteq
+++++
+
+[latexmath] 
+++++
+\int \oint \sum \prod
+++++
+
+[latexmath] 
+++++
+\lim_{h \rightarrow 0 } \frac{f(x+h)-f(x)}{h}
+++++
+
+[latexmath] 
+++++
+a_0+\cfrac{1}{a_1+\cfrac{1}{a_2+\cfrac{1}{a_3+\cdots}}}
+++++
 
 === Graphviz (dot)
 [graphviz]
