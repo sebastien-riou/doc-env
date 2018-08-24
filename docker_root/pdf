@@ -1,2 +1,2 @@
 #!/bin/sh
-asciidoctor -r asciidoctor-diagram -r asciidoctor-pdf -b pdf $*
+asciidoctor -r asciidoctor-diagram -r asciidoctor-pdf -r asciidoctor-mathematical -a mathematical-format=svg -b pdf $*

@@ -18,10 +18,8 @@
 #restore this:
 #	sudo docker load -i myapp.tar
 
-
-
-#FROM ubuntu:yakkety
-FROM ubuntu:artful
+#FROM ubuntu:artful
+FROM ubuntu:bionic
 
 # Set the working directory 
 WORKDIR /bin
@@ -30,12 +28,32 @@ WORKDIR /bin
 ADD . /bin
 
 # Install any needed packages 
+RUN apt-get update
+RUN apt-get -y install software-properties-common
+RUN add-apt-repository universe
+RUN add-apt-repository restricted
+RUN add-apt-repository multiverse
 RUN apt-get update 
 
-RUN apt-get install -y ruby default-jre graphviz nodejs npm phantomjs
+#RUN apt-get -y install ttf-lyx
+RUN apt-get -qq -y install fonts-lyx
+
+RUN apt-get install -y make cmake
+RUN apt-get install -y g++
+RUN apt-get install -y ruby ruby-dev default-jre graphviz 
+RUN apt-get install -y nodejs npm phantomjs
+RUN apt-get -qq -y install bison flex libffi-dev libxml2-dev libgdk-pixbuf2.0-dev libcairo2-dev libpango1.0-dev 
+
 RUN gem install asciidoctor-pdf --pre
 RUN gem install rouge
 RUN gem install asciidoctor-diagram
+
+ENV MATHEMATICAL_SKIP_STRDUP 1 
+RUN gem install mathematical
+
+#this generates a lot of warnings and takes a long time, but in the end it works (warnings related to test fixtures)
+RUN gem install asciidoctor-mathematical
+
 RUN npm i wavedrom-cli --save-dev
 
 RUN apt-get install -y \
@@ -52,7 +70,8 @@ RUN apt-get install -y \
 EXPOSE 80
 
 # Define environment variable
-#ENV NAME World
+#ENV NAME Value
+#needed for wavedrom
 ENV QT_QPA_PLATFORM offscreen
 
 #needed to be able to execute nano

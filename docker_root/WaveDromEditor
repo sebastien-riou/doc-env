@@ -3,4 +3,11 @@
 #echo $* > /home/user/Documents/cmd.log
 #cp /tmp/WaveDromEditor* /home/user/Documents/WaveDromEditor
 
-phantomjs /bin/node_modules/wavedrom-cli/bin/wavedrom-cli.js -i $2 -p $4
+if test "$3" = 'png'; then 
+    phantomjs /bin/node_modules/wavedrom-cli/bin/wavedrom-cli.js -i $2 -p $4
+fi
+
+if test "$3" = 'svg'; then
+    phantomjs /bin/node_modules/wavedrom-cli/bin/wavedrom-cli.js -i $2 -s $4
+fi
+
